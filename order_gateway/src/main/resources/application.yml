@@ -1,0 +1,26 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+server:
+  port: 80
+spring:
+  application:
+    name: zuul-server
+zuul:
+  routes:
+    goods-facade-service:
+      path: /goods/**
+      serviceId: goods-facade-service
+    sso-facade-service:
+      path: /user/**
+      serviceId: sso-facade-service
+
+security.basic.enabled: false
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: goods-facade-service,sso-facade-service
+  clusterNameExpression: new String("default")
